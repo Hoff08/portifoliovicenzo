@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicenzo - Portfólio & Vision</title>
+    <style>
+        /* Importando Fontes */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+        /* --- VARIAVEIS GERAIS --- */
+        :root {
+            --accent-white: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --gradient-text: linear-gradient(90deg, #ffffff 0%, #999999 100%);
+            
+            --card-width-desktop: 400px;
+            --card-width-mobile: 280px;
+            --gap: 30px;
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+
+            /* Variaveis da Biblioteca */
+            --accent-gold: #e5b05e;
+            --card-dark: #121212;
+        }
+
+        /* RESET GERAL */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #000; color: white; overflow-x: hidden; }
+
+        /* =========================================
+           SEÇÃO 1: HERO PRINCIPAL (TOPO)
+           ========================================= */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background-color: #000;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center;
+            overflow: hidden; 
+        }
+
+        /* --- CSS DO BLACK HOLE --- */
+        .black-hole {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; 
+        }
+        .black-hole::before {
+            content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 150%; height: 140%; background: radial-gradient(ellipse at 50% 55%, transparent 10%, #000 50%); z-index: 2;
+        }
+        .black-hole::after {
+            content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; background: radial-gradient(ellipse at 50% 75%, #444444 20%, transparent 75%);
+            mix-blend-mode: overlay; z-index: 5; opacity: 0.6;
+        }
+        .aura {
+            position: absolute; top: -71.5%; left: 50%; transform: translateX(-50%); width: 30%; height: 400%;
+            background: linear-gradient(20deg, #000000, #1a1a1a 16.5%, #333333 33%, #111111 49.5%, #000000 66%, #222222 85.5%, #444444 100%);
+            background-size: 100% 200%; border-radius: 0 0 100% 100%; filter: blur(50px);
+            mix-blend-mode: screen; opacity: 0.45; z-index: 3; animation: aura-glow 5s infinite linear;
+        }
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(transparent, transparent 1px, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0.05) 2px);
+            mix-blend-mode: overlay; opacity: 0.1; z-index: 10; pointer-events: none;
+        }
+        .tunnel { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; height: 80%; z-index: 1; }
+        .ring {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%;
+            border: 1px solid #333; animation: ring-pulse 10s infinite linear; box-shadow: 0 0 5px rgba(255, 255, 255, 0.05); opacity: 0.5;
+        }
+        @keyframes aura-glow { 0% { background-position: 0 100%; } 100% { background-position: 0 300%; } }
+        @keyframes ring-pulse { 0% { width: 0; height: 0; opacity: 0.8; } 100% { width: 100%; height: 100%; opacity: 0; } }
+        .ring:nth-child(1) { animation-delay: 0s; width: 10%; height: 10%; }
+        .ring:nth-child(2) { animation-delay: 1s; width: 20%; height: 20%; }
+        .ring:nth-child(3) { animation-delay: 2s; width: 30%; height: 30%; }
+        .ring:nth-child(4) { animation-delay: 3s; width: 40%; height: 40%; }
+        .ring:nth-child(5) { animation-delay: 4s; width: 50%; height: 50%; }
+
+        /* Navbar */
+        nav {
+            position: absolute; top: 0; width: 100%; padding: 30px 50px;
+            display: flex; justify-content: center; align-items: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); z-index: 20;
+        }
+        .nav-container {
+            display: flex; align-items: center; gap: 40px;
+            background: rgba(255, 255, 255, 0.03); padding: 10px 25px;
+            border-radius: 50px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .logo { font-weight: 600; font-size: 1.2rem; letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 20px; list-style: none; }
+        .nav-links a { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
+        .nav-links a:hover { color: #fff; }
+        .btn-get-started-nav {
+            background: rgba(255, 255, 255, 0.1); padding: 8px 15px; border-radius: 20px;
+            font-size: 0.8rem; text-decoration: none; color: white; transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .btn-get-started-nav:hover { background: rgba(255, 255, 255, 0.2); }
+
+        /* Conteúdo Hero */
+        .content { z-index: 5; max-width: 800px; padding: 0 20px; text-shadow: 0 10px 30px rgba(0,0,0,0.9); }
+        .content h1 { font-size: 5rem; font-weight: 400; line-height: 1; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero-p { font-size: 1rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 40px; font-weight: 300; }
+        .main-btn {
+            background: rgba(255, 255, 255, 0.08); color: white; padding: 15px 40px; border-radius: 50px;
+            text-decoration: none; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.15); transition: 0.3s;
+        }
+        .main-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+        /* Tags Flutuantes */
+        .scan-tag {
+            position: absolute; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15); padding: 5px 12px; border-radius: 20px;
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; 
+            z-index: 5; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .tag-1 { top: 38%; left: 15%; } .tag-2 { top: 25%; right: 15%; } .tag-3 { top: 60%; right: 20%; }
+        .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; }
+
+
+        /* =========================================
+           SEÇÃO 2: REAL PROJECTS (CARROSSEL)
+           ========================================= */
+        #real-projects {
+            background-color: #000; color: #fff; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; min-height: 100vh; width: 100%;
+            padding: 60px 0; overflow: hidden; position: relative; z-index: 5;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        #real-projects header { margin-bottom: 40px; padding: 0 20px; text-align: center; }
+        #real-projects h1 { 
+            font-size: 3rem; color: #fff; font-weight: 800; letter-spacing: -1px; 
+            display: flex; justify-content: center; align-items: center; gap: 15px; 
+            flex-wrap: wrap; margin-bottom: 10px;
+        }
+        .header-icon { 
+            width: 60px; height: 30px; background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; 
+            display: inline-block; position: relative; backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        #real-projects h2 { 
+            font-size: 3.5rem; font-weight: 800; text-transform: uppercase; 
+            background: var(--gradient-text); -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; margin-bottom: 20px; 
+            text-shadow: 0px 4px 20px rgba(255, 255, 255, 0.1); text-align: center;
+        }
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.5; text-align: center; }
+
+        /* CARROSSEL STYLE */
+        .carousel-view { width: 100%; position: relative; padding: 40px 0; cursor: grab; touch-action: pan-y; overflow: visible; }
+        .carousel-view:active { cursor: grabbing; }
+        .carousel-track { display: flex; gap: var(--gap); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); width: max-content; margin: 0 auto; padding: 0 50px; }
+
+        .card {
+            width: var(--card-width-desktop); height: 500px; background-size: cover; background-position: center; 
+            border-radius: 30px; position: relative; flex-shrink: 0; transition: var(--transition);
+            transform: scale(0.85); opacity: 0.5; cursor: pointer; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .card:hover { opacity: 0.8; transform: scale(0.88); border-color: rgba(255,255,255,0.3); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0, 0, 0, 0.6) 70%, #000 100%);
+            border-radius: 30px; transition: opacity 0.3s; z-index: 1;
+        }
+        .card.active { transform: scale(1.1); opacity: 1; z-index: 10; box-shadow: 0 30px 60px rgba(0,0,0,0.5); cursor: default; border-color: rgba(255,255,255,0.4); }
+
+        .content-wrapper { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; align-items: flex-start; padding-bottom: 40px; }
+        .tag {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); padding: 6px 14px; border-radius: 30px; font-size: 0.7rem; font-weight: 700; 
+            text-transform: uppercase; color: #fff; letter-spacing: 1px; margin-bottom: 12px; display: inline-block;
+        }
+        .bottom-info { text-align: left; color: #fff; width: 100%; padding-right: 60px; }
+        .bottom-info h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0; text-transform: uppercase; line-height: 1; opacity: 0.9; transition: all 0.5s; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .card.active .bottom-info h3 { font-size: 2.2rem; opacity: 1; margin-bottom: 5px; }
+        .bottom-info p { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.4; opacity: 0; max-height: 0; overflow: hidden; transition: all 0.5s ease; }
+        .card.active .bottom-info p { opacity: 1; max-height: 60px; }
+
+        .arrow-icon {
+            position: absolute; bottom: 35px; right: 30px; width: 50px; height: 50px; 
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.3);
+            transform: scale(0); opacity: 0; transition: all 0.4s ease 0.2s; z-index: 5;
+        }
+        .card.active:hover .arrow-icon { background: rgba(255, 255, 255, 1); color: #000; transform: scale(1.1) rotate(0deg); }
+        .card.active .arrow-icon { transform: scale(1) rotate(-45deg); opacity: 1; }
+
+        .progress-container { width: 200px; height: 4px; background-color: rgba(255,255,255,0.1); margin: 30px auto 0; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0%; background: #fff; transition: width 0.5s ease; }
+
+        /* =========================================
+           SEÇÃO 3: SOBRE MIM
+           ========================================= */
+        .about-cover {
+            position: relative; min-height: 100vh; width: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.9) 85%, #000 100%), url('home.png'); 
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; padding: 0 6%; margin-top: 0;
+        }
+        .hero-main-content { margin-top: auto; display: grid; grid-template-columns: 1.5fr 1fr; align-items: flex-end; padding-bottom: 80px; }
+        .hero-left p { font-size: 18px; font-weight: 500; margin-bottom: 5px; letter-spacing: -0.5px; color: rgba(255, 255, 255, 0.8); }
+        .hero-left h1 { font-size: clamp(60px, 12vw, 150px); line-height: 0.85; font-weight: 700; letter-spacing: -4px; }
+        .glass-card-about {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 24px; max-width: 350px;
+        }
+        .glass-card-about h3 { font-size: 20px; margin-bottom: 12px; font-weight: 600; }
+        .glass-card-about p { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
+        .about-details { padding: 120px 6%; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; background-color: #000; }
+        .label-style { color: #fff; text-transform: uppercase; font-size: 12px; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 20px; opacity: 0.7; }
+        .col-left h2 { font-size: 50px; line-height: 1.1; font-weight: 600; }
+        .col-right .lead { font-size: 24px; font-weight: 600; margin-bottom: 30px; color: #fff; }
+        .col-right p { color: #999; font-size: 16px; margin-bottom: 25px; line-height: 1.8; }
+
+        /* =========================================
+           SEÇÃO 4: OVERLAY BIBLIOTECA & CURSOS
+           ========================================= */
+        #library-overlay, #video-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px;
+        }
+
+        #library-overlay.open, #video-overlay.open {
+            transform: translateY(0);
+        }
+
+        /* Estilos Internos da Biblioteca */
+        .library-content-wrapper {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            width: 100%;
+            max-width: 1200px;
+            display: flex; flex-direction: column; align-items: center;
+            padding-bottom: 50px;
+        }
+
+        .header-nav-overlay {
+            width: 100%;
+            display: flex; justify-content: flex-start;
+            padding: 30px 0;
+        }
+
+        .btn-back {
+            width: 45px; height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%; color: white;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; cursor: pointer; transition: 0.3s; font-size: 1.2rem;
+        }
+        .btn-back:hover { background: rgba(255, 255, 255, 0.15); border-color: var(--accent-gold); }
+
+        .section-header-lib { text-align: center; margin: 40px 0 30px; }
+        .section-header-lib span { color: var(--accent-gold); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; font-weight: 700; }
+        .section-header-lib h2 { font-size: 2.5rem; font-weight: 700; margin-top: 10px; }
+
+        .cert-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            width: 100%; max-width: 1100px; margin-bottom: 80px;
+        }
+        .cert-card {
+            background: var(--card-dark); border-radius: 24px; padding: 30px;
+            border: 1px solid #1f1f1f; height: 180px; display: flex; flex-direction: column;
+            justify-content: flex-end; position: relative; transition: 0.3s;
+        }
+        .cert-card:hover { border-color: #333; transform: translateY(-5px); }
+        .selo-badge {
+            position: absolute; top: 25px; right: 25px;
+            background: var(--accent-gold); color: #000; font-size: 9px; font-weight: 800;
+            padding: 4px 10px; border-radius: 6px;
+        }
+        .cert-card p { font-size: 0.8rem; color: #666; font-weight: 600; letter-spacing: 1px; margin-bottom: 5px; }
+        .cert-card h3 { font-size: 1.4rem; color: #fff; }
+
+        .library-controls { margin-bottom: 30px; text-align: center; }
+        .library-controls h2 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 2px; color: #ccc; }
+        .nav-arrows { display: flex; gap: 12px; justify-content: center; margin-top: 15px; }
+        .arrow-btn {
+            width: 42px; height: 42px; border-radius: 50%; border: 1px solid #333;
+            background: transparent; color: white; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .arrow-btn:hover { background: #fff; color: #000; }
+
+        .shelf {
+            display: flex; gap: 20px; overflow-x: auto; padding: 20px 0;
+            scrollbar-width: none; scroll-behavior: smooth; width: 100%;
+        }
+        .shelf::-webkit-scrollbar { display: none; }
+
+        .book-item {
+            min-width: 250px; height: 360px; border-radius: 18px; overflow: hidden;
+            position: relative; flex-shrink: 0; border: 1px solid #222; transition: 0.4s ease;
+        }
+        .book-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .book-hover {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+            opacity: 0; transition: 0.3s;
+        }
+        .book-item:hover { transform: scale(1.03); border-color: #fff; }
+        .book-item:hover .book-hover { opacity: 1; }
+        .book-item:hover img { filter: brightness(0.4); }
+        .book-hover h4 { font-size: 1.1rem; margin-bottom: 5px; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .book-hover span { color: #4ade80; font-size: 10px; font-weight: 800; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* =========================================
+           SEÇÃO 5: ESTILOS DO OVERLAY DE VIDEO (NOVO)
+           ========================================= */
+        .video-header {
+            padding: 20px 20px 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .section-title {
+            font-weight: 200;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 18px;
+        }
+
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 45px;
+        }
+
+        /* --- EFEITO GLASSMORPHISM --- */
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px; padding: 10px 22px;
+            font-size: 12px; font-weight: 400; color: #fff;
+            letter-spacing: 1px; text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .glass-badge:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .software-glass {
+            width: 65px; height: 65px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 12px; transition: 0.3s;
+        }
+        .software-glass img { width: 100%; height: auto; border-radius: 6px; }
+        .software-glass:hover { border-color: #fff; background: rgba(255, 255, 255, 0.1); }
+
+        /* --- GRID DE VÍDEOS --- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            grid-template-rows: 300px 300px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Renomeado para video-card para não conflitar com o carrossel */
+        .video-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .video-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            z-index: 2;
+        }
+
+        .video-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+            transition: 0.5s;
+        }
+
+        .video-card:hover img { filter: brightness(0.7); }
+
+        .video-card span {
+            position: absolute; bottom: 25px; left: 25px;
+            font-size: 14px; font-weight: 600; color: #fff;
+            z-index: 10; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .shorts-column {
+            grid-column: 3 / 4;
+            grid-row: 1 / 3;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .content h1 { font-size: 3rem; }
+            .nav-container { display: none; }
+            #real-projects h1 { font-size: 1.8rem; } 
+            #real-projects h2 { font-size: 2rem; }
+            .card { width: var(--card-width-mobile); height: 400px; }
+            .card.active { transform: scale(1.05); }
+            .hero-main-content, .about-details { grid-template-columns: 1fr; gap: 50px; }
+            .glass-card-about { max-width: 100%; }
+            .tag-1 { left: 5%; top: 20%; } .tag-2 { right: 5%; }
+            
+            /* Overlay Mobile */
+            .cert-row { grid-template-columns: 1fr; }
+            .section-header-lib h2 { font-size: 2rem; }
+            
+            /* Video Mobile */
+            .main-grid { display: flex; flex-direction: column; height: auto; }
+            .video-card, .shorts-column { height: 250px; }
+            .shorts-column { display: flex; flex-direction: column; height: auto; }
+            .shorts-column .video-card { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION (TOPO) -->
+    <section class="hero-section">
+        
+        <!-- BLACK HOLE BACKGROUND -->
+        <div class="black-hole">
+            <div class="tunnel">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+            </div>
+            <div class="aura"></div>
+            <div class="overlay"></div>
+        </div>
+
+        <nav>
+            <div class="nav-container">
+                <div class="logo">Vicenzo Portfólio</div>
+                <ul class="nav-links">
+                    <li><a href="#real-projects">Projetos</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+                <a href="#real-projects" class="btn-get-started-nav">Ver mais</a>
+            </div>
+        </nav>
+
+        <div class="scan-tag tag-1"><span class="dot" style="border: 1px dashed white; background: transparent;"></span>Test in progress</div>
+        <div class="scan-tag tag-2"><span class="dot"></span>Astigmatism detected</div>
+        <div class="scan-tag tag-3"><span class="dot" style="background: #4CAF50;"></span>Prescription found</div>
+
+        <div class="content">
+            <h1>Onde estratégia<br>vira resultado</h1>
+            <p class="hero-p">Projetos reais, decisões inteligentes e foco em resultado.</p>
+            <a href="#real-projects" class="main-btn">Explorar Projetos</a>
+        </div>
+    </section> 
+
+    <!-- REAL PROJECTS (CAROUSEL) -->
+    <section id="real-projects">
+        <header>
+            <h1>PROJETOS DESENVOLVIDOS <span class="header-icon"></span> COM </h1>
+            <h2>PENSAMENTO ESTRATEGICO</h2>
+            <p class="subtitle">Cada projeto apresentado aqui resolve um problema real e entrega valor mensurável.</p>
+        </header>
+
+        <div class="carousel-view" id="carousel-view">
+            <div class="carousel-track" id="track">
+                
+                <!-- CARD 0 -->
+                <div class="card" onclick="handleClick(0)">
+                    <div class="content-wrapper">
+                        <span class="tag">WEB DESIGN</span>
+                        <div class="bottom-info">
+                            <h3>FLUID MOTION</h3>
+                            <p>Ver Projeto Completo</p>
+                        </div>
+                        <div class="arrow-icon">➔</div>
+                    </div>
+                </div>
+
+                <!-- CARD 1 -->
+                <div class="card" onclick="handleClick(1)">
+                    <div class="content-wrapper">
+                        <span class="tag">Fotografia</span>
+                        <div class="bottom-info">
+                            <h3>Veja as fotos</h3>
+                            <p>Veja agora</p>
+                        </div>
+                        <div class="arrow-icon">➔</div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 (TARGET VIDEO CLICK) -->
+                <div class="card" onclick="handleClick(2)">
+                    <div class="content-wrapper">
+                        <span class="tag">Audio Visual</span>
+                        <div class="bottom-info">
+                            <h3>Editor de Video</h3>
+                            <p>Assistir Vídeo</p>
+                        </div>
+                        <div class="arrow-icon">➔</div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="card" onclick="handleClick(3)">
+                    <div class="content-wrapper">
+                        <span class="tag">Design</span>
+                        <div class="bottom-info">
+                            <h3>SCARLET ELEGANCE</h3>
+                            <p>Design</p>
+                        </div>
+                        <div class="arrow-icon">➔</div>
+                    </div>
+                </div>
+
+                 <!-- CARD 4 (TARGET LIBRARY CLICK) -->
+                 <div class="card" onclick="handleClick(4)">
+                    <div class="content-wrapper">
+                        <span class="tag">Auto Conhecimento</span>
+                        <div class="bottom-info">
+                            <h3>Cursos e Livro</h3>
+                            <p>Explorar Interface</p>
+                        </div>
+                        <div class="arrow-icon">➔</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-fill"></div>
+        </div>
+    </section>
+
+    <!-- SOBRE MIM -->
+    <div id="sobre">
+        <section class="about-cover">
+            <div class="hero-main-content">
+                <div class="hero-left">
+                    <p>Fotógrafo & Cineasta</p>
+                    <h1>Sobre</h1>
+                </div>
+                
+                <div class="hero-right">
+                    <div class="glass-card-about">
+                        <h3>A Pessoa Por Trás do Trabalho.</h3>
+                        <p>Uma mente criativa que captura histórias nos detalhes silenciosos, transformando momentos cotidianos em quadros atemporais.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="about-details">
+            <div class="col-left">
+                <span class="label-style">Quem Eu Sou</span>
+                <h2>Design com Propósito e Personalidade</h2>
+            </div>
+            <div class="col-right">
+                <p class="lead">Moldando marcas significativas através de estratégia, criatividade e colaboração.</p>
+                <p>Sou um líder criativo multidisciplinar com atuação em branding, design de embalagens, fotografia, cinema e direção criativa.</p>
+                <p>Com uma base sólida em design thinking, foco em criar experiências limpas, intuitivas e orientadas por um propósito.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- =========================================
+         OVERLAY DA BIBLIOTECA (CARD 4)
+         ========================================= -->
+    <div id="library-overlay">
+        <div class="library-content-wrapper">
+            <div class="header-nav-overlay">
+                <button onclick="closeLibrary()" class="btn-back">←</button>
+            </div>
+
+            <div class="section-header-lib">
+                <span>Reconhecimento</span>
+                <h2>Certificados</h2>
+            </div>
+
+            <div class="cert-row">
+                <div class="cert-card">
+                    <div class="selo-badge">OFICIAL</div>
+                    <p>Desenvolvimento de sistemas</p>
+                    <h3>SESI SENAI</h3>
+                </div>
+                <div class="cert-card">
+                    <div class="selo-badge">Cursos</div>
+                    <p>Design</p>
+                    <h3>Curso de Designer</h3>
+                </div>
+                <div class="cert-card">
+                    <div class="selo-badge">Curso</div>
+                    <p>BRADING</p>
+                    <h3>Curso para diretor de brading</h3>
+                </div>
+            </div>
+
+            <div class="library-container">
+                <div class="library-controls">
+                    <h2>Livros que já li</h2>
+                    <p style="color: #666; font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif;">7 Obras Fundamentais. Navegue lateralmente.</p>
+                    
+                    <div class="nav-arrows">
+                        <button class="arrow-btn" onclick="document.getElementById('shelf').scrollLeft -= 300">←</button>
+                        <button class="arrow-btn" onclick="document.getElementById('shelf').scrollLeft += 300">→</button>
+                    </div>
+                </div>
+
+                <div class="shelf" id="shelf">
+                    <div class="book-item">
+                        <img src="comofazeramigosinfluenciarpessoas.png">
+                        <div class="book-hover"><h4>Como fazer amigos e influenciar pessoas</h4><span>✦ 100% LIDO</span></div>
+                    </div>
+                    <div class="book-item">
+                        <img src="maisespertoqueodia.png">
+                        <div class="book-hover"><h4>Mais esperto que o diabo</h4><span>✦ 100% LIDO</span></div>
+                    </div>
+                    <div class="book-item">
+                        <img src="leidotriunfo.jpg">
+                        <div class="book-hover"><h4>Lei do Triunfo</h4><span>✦ 100% LIDO</span></div>
+                    </div>
+                    <div class="book-item">
+                        <img src="48leisdopoder.jpg">
+                        <div class="book-hover"><h4>48 Leis do poder</h4><span>✦ 100% LIDO</span></div>
+                    </div>
+                    <div class="book-item">
+                        <img src="do milao.png">
+                        <div class="book-hover"><h4></h4><span>✦ 30% LIDO</span></div>
+                    </div>
+                    <div class="book-item">
+                        <img src="oqueocorpofala.png">
+                        <div class="book-hover"><h4>oqueocorpofala</h4><span>✦ 100% LIDO</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         OVERLAY DE VIDEOS (CARD 2 - NOVO)
+         ========================================= -->
+    <div id="video-overlay">
+        <div class="library-content-wrapper"> <!-- Reusando wrapper para alinhar -->
+            
+            <div class="header-nav-overlay">
+                <button onclick="closeVideo()" class="btn-back">←</button>
+            </div>
+
+            <div class="video-header">
+                <div class="section-title">Aplicativos de edição:</div>
+                <div class="badges-container">
+                    <div class="software-glass">
+                        <img src="davinci.png" alt="DaVinci">
+                    </div>
+                    <div class="software-glass">
+                        <img src="capcut.png" alt="CapCut">
+                    </div>
+                </div>
+
+                <div class="section-title">Experiente em:</div>
+                <div class="badges-container">
+                    <div class="glass-badge">Color Grading</div>
+                    <div class="glass-badge">Vídeo para Reels</div>
+                    <div class="glass-badge">Documentários</div>
+                    <div class="glass-badge">Vídeos Cinemáticos</div>
+                </div>
+            </div>
+
+            <div class="main-grid">
+                <a href="#" target="_blank" class="video-card" style="grid-column: 1/2;">
+                    <span>Video - Pastor Enéas</span>
+                    <img src="igreja.png">
+                </a>
+                <a href="#" target="_blank" class="video-card" style="grid-column: 2/3;">
+                    <span>Video Consientização - Trabalho colégio</span>
+                    <img src="documentario.png">
+                </a>
+
+                <a href="#" target="_blank" class="video-card" style="grid-column: 1/2;">
+                    <span>Video Academia - Ronaldy </span>
+                    <img src="academia.png">
+                </a>
+                <a href="#" target="_blank" class="video-card" style="grid-column: 2/3;">
+                    <span>Parodia - Trabalho colégio</span>
+                    <img src="parodia.png">
+                </a>
+
+                <div class="shorts-column">
+                    <a href="#" target="_blank" class="video-card">
+                        <span>Video - Churras do Chris</span>
+                        <img src="chris.png">
+                    </a>
+                    <a href="#" target="_blank" class="video-card">
+                        <span>Video - Tio Pedrinho</span>
+                        <img src="pedrinho.png">
+                    </a>
+                    <a href="#" target="_blank" class="video-card">
+                        <span>Color Grading - Iokai Sushi</span>
+                        <img src="color.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        const track = document.getElementById('track');
+        const view = document.getElementById('carousel-view');
+        const cards = document.querySelectorAll('.card');
+        const progressFill = document.querySelector('.progress-fill');
+        
+        let currentIndex = 2;
+        let startX = 0;
+        let isDragging = false;
+
+        // Imagens dos Cards
+        const images = [
+            'https://images.unsplash.com/photo-1574635998188-301777263592?q=80&w=800&auto=format&fit=crop',
+            'cameera.png',
+            'video.jpg',
+            'fotodesign.png',
+            'livros.jpg'
+        ];
+        
+        cards.forEach((card, i) => card.style.backgroundImage = `url(${images[i]})`);
+
+        function updateCarousel() {
+            const viewWidth = view.offsetWidth;
+            const cardStyle = window.getComputedStyle(cards[0]);
+            const cardWidth = parseFloat(cardStyle.width);
+            const gap = 30;
+
+            const centerPosition = viewWidth / 2;
+            const currentCardCenter = (currentIndex * (cardWidth + gap)) + (cardWidth / 2);
+            const moveAmount = centerPosition - currentCardCenter;
+
+            track.style.transform = `translateX(${moveAmount}px)`;
+
+            cards.forEach((card, index) => {
+                if (index === currentIndex) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            const percentage = ((currentIndex + 1) / cards.length) * 100;
+            progressFill.style.width = `${percentage}%`;
+        }
+
+        // --- FUNÇÃO DE CLIQUE MODIFICADA ---
+        function handleClick(index) {
+            if (isDragging) return;
+            
+            // Se clicar no card que já está ativo
+            if (index === currentIndex) {
+                // CARD 4: Cursos e Livro
+                if(index === 4) {
+                    document.getElementById('library-overlay').classList.add('open');
+                } 
+                // CARD 2: Video Portfolio (NOVO)
+                else if (index === 2) {
+                    document.getElementById('video-overlay').classList.add('open');
+                }
+                else {
+                    console.log(`Abrindo: ${cards[index].querySelector('h3').innerText}`);
+                }
+            } else {
+                // Caso contrário, apenas navega para o card
+                currentIndex = index;
+                updateCarousel();
+            }
+        }
+
+        // --- FUNÇÕES PARA FECHAR OS OVERLAYS ---
+        function closeLibrary() {
+            document.getElementById('library-overlay').classList.remove('open');
+        }
+
+        function closeVideo() {
+            document.getElementById('video-overlay').classList.remove('open');
+        }
+
+        view.addEventListener('mousedown', touchStart);
+        view.addEventListener('touchstart', touchStart);
+        view.addEventListener('mousemove', touchMove);
+        view.addEventListener('touchmove', touchMove);
+        view.addEventListener('mouseup', touchEnd);
+        view.addEventListener('mouseleave', () => { if(isDragging) touchEnd() });
+        view.addEventListener('touchend', touchEnd);
+
+        function touchStart(event) {
+            isDragging = true;
+            startX = getPositionX(event);
+            view.style.cursor = 'grabbing';
+            track.style.transition = 'none';
+        }
+        function touchMove(event) { if (!isDragging) return; }
+        function touchEnd(event) {
+            if (!isDragging) return;
+            isDragging = false;
+            view.style.cursor = 'grab';
+            track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+
+            const endX = getPositionX(event);
+            const diff = endX - startX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex > 0) currentIndex--;
+                else if (diff < 0 && currentIndex < cards.length - 1) currentIndex++;
+            }
+            updateCarousel();
+        }
+
+        function getPositionX(event) {
+            return event.type.includes('mouse') ? event.pageX : event.changedTouches[0].clientX;
+        }
+
+        window.addEventListener('resize', updateCarousel);
+        setTimeout(() => { updateCarousel(); }, 100);
+    </script>
+</body>
+</html>

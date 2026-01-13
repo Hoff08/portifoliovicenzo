@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Portfolio | Glassmorphism Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0b0b0b;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(circle at 50% -20%, #1a1a1a 0%, #0b0b0b 80%);
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            padding: 80px 20px 50px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-weight: 200;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 25px;
+        }
+
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        /* --- EFEITO GLASSMORPHISM --- */
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #ccc;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-badge:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Ícones de Tech em Glass */
+        .software-glass {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .software-glass i { font-size: 30px; color: #fff; }
+        .software-glass img { width: 100%; height: auto; opacity: 0.8; }
+
+        .software-glass:hover {
+            border-color: #007bff;
+            background: rgba(0, 123, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* --- GRID DE PROJETOS (WEBSITES) --- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Duas colunas iguais para sites ficam melhor */
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+
+        .card {
+            position: relative;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #151515;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top; /* Mostra o topo do site */
+            opacity: 0.5;
+            transition: 0.8s;
+        }
+
+        .card:hover img {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        /* Overlay de Informações */
+        .card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            z-index: 10;
+        }
+
+        .card-info h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .card-info p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: #007bff;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 800px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .card { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="section-title">Tecnologias que utilizo:</div>
+        <div class="badges-container">
+            <div class="software-glass">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+            </div>
+            <div class="software-glass">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+            </div>
+            <div class="software-glass">
+                <img src="https://cdn.z jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">
+            </div>
+            <div class="software-glass">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+            </div>
+        </div>
+
+        <div class="section-title">Especialidades Web:</div>
+        <div class="badges-container">
+            <div class="glass-badge">UI/UX Design</div>
+            <div class="glass-badge">Sites Responsivos</div>
+            <div class="glass-badge">Landing Pages</div>
+            <div class="glass-badge">SEO Optimization</div>
+            <div class="glass-badge">E-commerce</div>
+        </div>
+    </header>
+
+    <div class="main-grid">
+        <a href="URL_DO_SITE_1" target="_blank" class="card">
+            <img src="print-site1.png" alt="Preview Site">
+            <div class="card-info">
+                <h3>Plataforma E-learning</h3>
+                <p>HTML5 • CSS3 • JavaScript</p>
+            </div>
+        </a>
+
+        <a href="URL_DO_SITE_2" target="_blank" class="card">
+            <img src="print-site2.png" alt="Preview Site">
+            <div class="card-info">
+                <h3>Landing Page SaaS</h3>
+                <p>React • Tailwind CSS</p>
+            </div>
+        </a>
+
+        <a href="URL_DO_SITE_3" target="_blank" class="card">
+            <img src="print-site3.png" alt="Preview Site">
+            <div class="card-info">
+                <h3>Dashboard Administrativo</h3>
+                <p>Vue.js • Node.js</p>
+            </div>
+        </a>
+
+        <a href="URL_DO_SITE_4" target="_blank" class="card">
+            <img src="print-site4.png" alt="Preview Site">
+            <div class="card-info">
+                <h3>Portfólio Criativo</h3>
+                <p>Next.js • Framer Motion</p>
+            </div>
+        </a>
+    </div>
+
+</body>
+</html>
