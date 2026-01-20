@@ -456,6 +456,48 @@
             .web-grid { grid-template-columns: 1fr; }
             .web-card { height: 300px; }
         }
+        /* =========================================
+           SEÇÃO CONTATO
+           ========================================= */
+        #contato {
+            background-color: #000;
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .contact-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        .contact-content p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .whatsapp-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: 0.3s;
+            display: inline-block;
+            font-weight: 500;
+        }
+        .whatsapp-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -482,7 +524,7 @@
                 <ul class="nav-links">
                     <li><a href="#real-projects">Projetos</a></li>
                     <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#">Contato</a></li>
+                    <li><a href="#contato">Contato</a></li>
                 </ul>
                 <a href="#real-projects" class="btn-get-started-nav">Ver mais</a>
             </div>
@@ -614,6 +656,14 @@
         </div>
     </main>
 </div>
+
+<section id="contato">
+    <div class="contact-content">
+        <h2>Entre em Contato</h2>
+        <p>Quer conversar sobre um projeto ou colaboração? Me envie uma mensagem no WhatsApp!</p>
+        <a href="https://wa.me/554891222650" target="_blank" class="whatsapp-btn">Falar no WhatsApp</a>
+    </div>
+</section>
 
     <!-- =========================================
          OVERLAY DA BIBLIOTECA (CARD 3)
